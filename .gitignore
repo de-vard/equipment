@@ -1,0 +1,74 @@
+.env
+*.env
+
+# Стандартный .gitignore для Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/
+
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Файлы редактора/IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# PyCharm
+
+*.iml
+*.ipr
+*.iws
+
+# Базы данных
+*.db
+*.sqlite
+*.sqlite3
+/postgres_data/
+
+# Статические файлы (если собираются)
+/staticfiles/
+/static/
+
+# Файлы зависимостей
+*.egg-info/
+/dist/
+/build/
+pip-wheel-metadata/
+
+# Файлы документации
+/docs/_build/
+
+# Тестовые покрытия
+.coverage
+htmlcov/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Файлы кэша
+.cache
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Миграции (если не хотите их коммитить)
+# /migrations/
+# !/migrations/__init__.py
