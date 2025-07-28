@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #
+    # DRF
     'rest_framework',
+
+    # CORS
+    'corsheaders',
 
     # local
     'user.apps.UserConfig',
@@ -89,7 +92,12 @@ REST_FRAMEWORK = {
 
 }
 
+
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # DRF
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
