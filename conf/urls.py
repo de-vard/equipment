@@ -22,7 +22,7 @@ from rest_framework import routers
 
 
 from authentication.views import LoginViewSet
-from equipment.views import EquipmentViewSet
+from equipment.views import EquipmentViewSet, UserEquipmentListView, EquipmentDetailWithHistoryView
 
 router = routers.DefaultRouter()
 
@@ -37,11 +37,14 @@ urlpatterns = [
     # API endpoints
     path('api/v1/', include(router.urls)),
 
+
+
     # Дополнительные URLs для transfer_request
     path('api/v1/transfer/', include('transfer_request.urls')),
 
     # Если нужно добавить equipment-specific URLs
-    path('api/v1/equipment-/', include('equipment.urls')),
+    path('api/v1/equip/history/<uuid:public_id>/', EquipmentDetailWithHistoryView.as_view(), name='equipment-with-history'),
+    path('api/v1/equip/my/', UserEquipmentListView.as_view(), name='user-equipment'),
     ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

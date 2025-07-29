@@ -58,10 +58,10 @@ INSTALLED_APPS = [
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(
-        minutes=int(os.getenv('JWT_ACCESS_TOKEN_LIFETIME_MINUTES', '15'))
+        minutes=int(os.getenv('JWT_ACCESS_TOKEN_LIFETIME_MINUTES'))
     ),
     'REFRESH_TOKEN_LIFETIME': timedelta(
-        days=int(os.getenv('JWT_REFRESH_TOKEN_LIFETIME_DAYS', '1'))
+        days=int(os.getenv('JWT_REFRESH_TOKEN_LIFETIME_DAYS'))
     ),
     'SIGNING_KEY': os.getenv('JWT_SECRET_KEY', SECRET_KEY),
 
@@ -97,7 +97,7 @@ CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # DRF
+    'corsheaders.middleware.CorsMiddleware', # CROS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

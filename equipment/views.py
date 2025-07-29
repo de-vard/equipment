@@ -37,6 +37,7 @@ class EquipmentDetailWithHistoryView(generics.RetrieveAPIView):
     serializer_class = EquipmentSerializer
     permission_classes = [permissions.IsAuthenticated]
     queryset = Equipment.objects.all()
+    lookup_field = 'public_id'
 
     def retrieve(self, request, *args, **kwargs):
         """ Переопределенный метод retrieve для добавления истории перемещений

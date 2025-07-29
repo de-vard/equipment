@@ -27,4 +27,4 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Equipment
-        fields = '__all__'
+        fields = 'public_id','type','manufacturer','model','serial_number','supplier','decommissioned_equipment','photo','created_at','inverter_number', 'invoice_info','current_owner','legal_entity'
