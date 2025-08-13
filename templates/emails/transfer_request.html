@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Здравствуйте, {{ receiver }}!</p>
+
+    <p>Вам направлена заявка на передачу оборудования:</p>
+
+    <ul>
+        <li><strong>Оборудование:</strong> {{ equipment.type.name }} ({{ equipment.inventory_number }})</li>
+        <li><strong>Отправитель:</strong> {{ sender }}</li>
+        <li><strong>Комментарий:</strong> {{ request.comment|default:"не указан" }}</li>
+    </ul>
+
+    <p>
+        <a href="{{ link }}">Перейти к заявке</a>
+    </p>
+</body>
+</html>

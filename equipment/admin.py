@@ -6,7 +6,7 @@ from django.utils.html import format_html
 
 @admin.register(Equipment)
 class EquipmentAdmin(admin.ModelAdmin):
-    list_display = ('serial_number', 'type', 'manufacturer', 'current_owner', )
+    list_display = ('serial_number', 'type', 'manufacturer', 'current_owner', 'decommissioned_equipment')
     search_fields = ('serial_number',)
     list_filter = ('type', 'manufacturer')
 

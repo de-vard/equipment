@@ -11,18 +11,22 @@ class EquipmentType(NamedModel):
     Модель для хранения типов оборудования (категорий техники).
     Например: Ноутбук, Монитор, Телефон и т.д.
     """
+
     class Meta(NamedModel.Meta):
         verbose_name = "Тип техники"
         verbose_name_plural = "Типы техники"
+
 
 class Manufacturer(NamedModel):
     """
     Модель производителей оборудования.
     Например: Lenovo, Acer, Samsung и т.д.
     """
+
     class Meta(NamedModel.Meta):
         verbose_name = "Производитель"
         verbose_name_plural = "Производители"
+
 
 class LegalEntity(NamedModel):
     """
@@ -38,6 +42,7 @@ class LegalEntity(NamedModel):
     class Meta:
         verbose_name = "Юридическое лицо"
         verbose_name_plural = "Юридическое лица"
+
 
 class Equipment(BaseModel):
     """ Основная модель для учета оборудования.
@@ -60,13 +65,12 @@ class Equipment(BaseModel):
         help_text='Компания-производителя оборудования'
     )
     model = models.CharField('Модель', max_length=255)
-    serial_number = models.CharField('Серийный номер',max_length=100, unique=True, db_index=True)
+    serial_number = models.CharField('Серийный номер', max_length=100, unique=True, db_index=True)
     supplier = models.CharField('Поставщик', max_length=255, blank=True, null=True)
     decommissioned_equipment = models.BooleanField('Списана ли техника', default=False)
     photo = models.ImageField('Фото', upload_to='static/images/%Y/%m/%d', blank=True, null=True)
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
     updated_at = models.DateTimeField('Дата обновления', auto_now=True)
-
 
     # TODO: сделать поле обязательным, на данный момент поле не обязательное
     #  так как не кто не предоставил инвентарный номера
@@ -95,14 +99,9 @@ class Equipment(BaseModel):
         verbose_name='Юрлицо'
     )
 
-
     class Meta:
         verbose_name = "Оборудование"
         verbose_name_plural = "Оборудования"
 
-
-
-
     def __str__(self):
         return f"SN: {self.serial_number}"
-

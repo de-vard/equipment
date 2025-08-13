@@ -5,10 +5,11 @@ from base.models.bases import BaseModel
 from django.db import models
 
 from equipment.models import Equipment
+
 User = get_user_model()
 
-class TransferRequest(BaseModel):
 
+class TransferRequest(BaseModel):
     """Передачи оборудования"""
     equipment = models.ForeignKey(
         Equipment,
@@ -37,7 +38,7 @@ class TransferRequest(BaseModel):
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     requested_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата запроса')
-    accepted_at = models.DateTimeField(null=True, blank=True,verbose_name='Дата принятия или отказа от техники')
+    accepted_at = models.DateTimeField(null=True, blank=True, verbose_name='Дата принятия или отказа от техники')
     comment = models.TextField(blank=True, null=True, verbose_name='Комментарий')
 
     def __str__(self):

@@ -9,15 +9,18 @@ class EquipmentTypeSerializer(serializers.ModelSerializer):
         model = EquipmentType
         fields = '__all__'
 
+
 class ManufacturerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manufacturer
         fields = '__all__'
 
+
 class LegalEntitySerializer(serializers.ModelSerializer):
     class Meta:
         model = LegalEntity
         fields = '__all__'
+
 
 class EquipmentSerializer(serializers.ModelSerializer):
     type = EquipmentTypeSerializer(read_only=True)
@@ -27,4 +30,9 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Equipment
-        fields = 'public_id','type','manufacturer','model','serial_number','supplier','decommissioned_equipment','photo','created_at','inverter_number', 'invoice_info','current_owner','legal_entity'
+        fields = (
+            'public_id', 'type', 'manufacturer', 'model',
+            'serial_number', 'supplier', 'decommissioned_equipment',
+            'photo', 'created_at', 'inverter_number', 'invoice_info',
+            'current_owner', 'legal_entity'
+        )

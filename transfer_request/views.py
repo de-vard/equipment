@@ -1,5 +1,5 @@
 from django.db.models import Q
-from rest_framework import  permissions, generics
+from rest_framework import permissions, generics
 from rest_framework.throttling import UserRateThrottle
 
 from base.views.bases import BaseTransferRequestListView
@@ -52,20 +52,24 @@ class TransferRequestCreateView(generics.CreateAPIView):
         """Автоматически назначает отправителя (текущего пользователя)"""
         serializer.save(sender=self.request.user)
 
-# Для просмотра
+
 class TransferRequestDetailView(generics.RetrieveAPIView):
+    """ Детальный просмотр заявки"""
     serializer_class = TransferRequestSerializer
     permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'public_id'
 
     def get_queryset(self):
         return TransferRequest.objects.filter(
             Q(sender=self.request.user) | Q(receiver=self.request.user)
         )
 
-# Для обновления
+
 class TransferRequestUpdateView(generics.UpdateAPIView):
+    """Только для принятия или отказа от оборудования"""
     serializer_class = UpdateTransferRequestSerializer
     permission_classes = [permissions.IsAuthenticated, IsReceiverOrReadOnly]
+    lookup_field = 'public_id'
 
     def get_queryset(self):
         return TransferRequest.objects.filter(

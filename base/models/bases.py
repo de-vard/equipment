@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 
+
 class BaseModel(models.Model):
     public_id = models.UUIDField(
         db_index=True,  # Ускоряет поиск по public_id.
@@ -8,8 +9,10 @@ class BaseModel(models.Model):
         default=uuid.uuid4,  # Автоматически генерирует UUID.
         editable=False,  # Нельзя изменить вручную.
     )
+
     class Meta:
         abstract = True
+
 
 class NamedModel(BaseModel):
     """

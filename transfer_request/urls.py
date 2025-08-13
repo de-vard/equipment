@@ -7,6 +7,6 @@ urlpatterns = [
     path('pending-incoming/', views.PendingIncomingTransferRequestsView.as_view(), name='pending-incoming-transfers'),
     path('outgoing/', views.OutgoingTransferRequestsView.as_view(), name='outgoing-transfers'),
     path('pending-outgoing/', views.PendingOutgoingTransferRequestsView.as_view(), name='pending-outgoing-transfers'),
-    path('requests/<int:pk>/', views.TransferRequestDetailView.as_view(), name='transfer-detail'),
-    path('update/<int:pk>/', views.TransferRequestUpdateView.as_view(), name='transfer-update'),
+    path('requests/<uuid:public_id>/', views.TransferRequestDetailView.as_view(), name='transfer-detail'),
+    path('update/<uuid:public_id>/', views.TransferRequestUpdateView.as_view(), name='transfer-update'),
 ]
