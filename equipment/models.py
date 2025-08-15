@@ -67,7 +67,7 @@ class Equipment(BaseModel):
     model = models.CharField('Модель', max_length=255)
     serial_number = models.CharField('Серийный номер', max_length=100, unique=True, db_index=True)
     supplier = models.CharField('Поставщик', max_length=255, blank=True, null=True)
-    decommissioned_equipment = models.BooleanField('Списана ли техника', default=False)
+    decommissioned_equipment = models.BooleanField('Списана ли техника', default=False, db_index=True)
     photo = models.ImageField('Фото', upload_to='static/images/%Y/%m/%d', blank=True, null=True)
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
     updated_at = models.DateTimeField('Дата обновления', auto_now=True)
@@ -104,4 +104,5 @@ class Equipment(BaseModel):
         verbose_name_plural = "Оборудования"
 
     def __str__(self):
+        """Возвращает строковое представление в формате: [Модель] SN: серийный_номер"""
         return f"SN: {self.serial_number}"

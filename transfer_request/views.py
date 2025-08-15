@@ -11,15 +11,15 @@ from transfer_request.serializers import TransferRequestSerializer, CreateTransf
 
 class IncomingTransferRequestsView(BaseTransferRequestListView):
     """
-    Представление для просмотра входящих заявок на перемещение оборудования.
-    Показывает только те заявки, где текущий пользователь указан как получатель (receiver).
+        Представление для просмотра входящих заявок на перемещение оборудования.
+        Показывает только те заявки, где текущий пользователь указан как получатель (receiver).
     """
     filter_field = 'receiver'
 
 
 class PendingIncomingTransferRequestsView(BaseTransferRequestListView):
     """
-    Просмотр входящих заявок на перемещение оборудования со статусом 'Ожидание'.
+        Просмотр входящих заявок на перемещение оборудования со статусом 'Ожидание'.
     """
     filter_field = 'receiver'
     status_filter = 'pending'
@@ -27,22 +27,24 @@ class PendingIncomingTransferRequestsView(BaseTransferRequestListView):
 
 class OutgoingTransferRequestsView(BaseTransferRequestListView):
     """
-    API endpoint для просмотра ИСХОДЯЩИХ заявок на перемещение оборудования.
-    Показывает только те заявки, которые создал текущий пользователь (где он отправитель).
+        API endpoint для просмотра ИСХОДЯЩИХ заявок на перемещение оборудования.
+        Показывает только те заявки, которые создал текущий пользователь (где он отправитель).
     """
     filter_field = 'sender'
 
 
 class PendingOutgoingTransferRequestsView(BaseTransferRequestListView):
     """
-    Просмотр исходящих заявок на перемещение оборудования со статусом 'Ожидание'.
+        Просмотр исходящих заявок на перемещение оборудования со статусом 'Ожидание'.
     """
     filter_field = 'sender'
     status_filter = 'pending'
 
 
 class TransferRequestCreateView(generics.CreateAPIView):
-    """Только для создания заявок на перемещение оборудования"""
+    """
+        Только для создания заявок на перемещение оборудования
+    """
     permission_classes = [permissions.IsAuthenticated, IsActiveUser]
     queryset = TransferRequest.objects.all()
     serializer_class = CreateTransferRequestSerializer
@@ -52,9 +54,20 @@ class TransferRequestCreateView(generics.CreateAPIView):
         """Автоматически назначает отправителя (текущего пользователя)"""
         serializer.save(sender=self.request.user)
 
+class TransferEquipmentHistoryView(generics.ListAPIView):
+    """
+        Представление для получения истории перемещения оборудования
+    """
+    serializer_class = TransferRequestSerializer
+
+    def get_queryset(self):
+        equipment_id = self.kwargs['public_id']
+        return TransferRequest.objects.filter(equipment__public_id=equipment_id)
 
 class TransferRequestDetailView(generics.RetrieveAPIView):
-    """ Детальный просмотр заявки"""
+    """
+        Детальный просмотр заявки
+    """
     serializer_class = TransferRequestSerializer
     permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'public_id'
@@ -66,7 +79,9 @@ class TransferRequestDetailView(generics.RetrieveAPIView):
 
 
 class TransferRequestUpdateView(generics.UpdateAPIView):
-    """Только для принятия или отказа от оборудования"""
+    """
+        Только для принятия или отказа от оборудования
+    """
     serializer_class = UpdateTransferRequestSerializer
     permission_classes = [permissions.IsAuthenticated, IsReceiverOrReadOnly]
     lookup_field = 'public_id'

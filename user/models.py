@@ -57,6 +57,13 @@ class CustomUser(AbstractUser, BaseModel):
         verbose_name_plural = "Пользователи"
         ordering = ['last_name', 'first_name']  # Сортировка по фамилии и имени
 
+    def get_full_name(self):
+        """
+            Возвращает Имя и Отчество
+        """
+        full_name = "%s %s" % (self.last_name, self.middle_name)
+        return full_name.strip()
+
     def __str__(self):
         """Строковое представление пользователя (ФИО)"""
         return f"{self.last_name} {self.first_name} {self.middle_name}"

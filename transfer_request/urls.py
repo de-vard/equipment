@@ -9,4 +9,5 @@ urlpatterns = [
     path('pending-outgoing/', views.PendingOutgoingTransferRequestsView.as_view(), name='pending-outgoing-transfers'),
     path('requests/<uuid:public_id>/', views.TransferRequestDetailView.as_view(), name='transfer-detail'),
     path('update/<uuid:public_id>/', views.TransferRequestUpdateView.as_view(), name='transfer-update'),
+    path('history/<uuid:public_id>/', views.TransferEquipmentHistoryView.as_view(),name='history-detail'),
 ]

@@ -36,7 +36,7 @@ class TransferRequest(BaseModel):
         ('accepted', 'Принято'),
         ('rejected', 'Отклонено'),
     ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES,db_index=True, default='pending')
     requested_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата запроса')
     accepted_at = models.DateTimeField(null=True, blank=True, verbose_name='Дата принятия или отказа от техники')
     comment = models.TextField(blank=True, null=True, verbose_name='Комментарий')

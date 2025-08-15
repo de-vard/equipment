@@ -193,3 +193,12 @@ AUTH_USER_MODEL = 'user.CustomUser'
 
 LOGIN_REDIRECT_URL = 'user-profile'
 LOGOUT_REDIRECT_URL = 'login'
+
+#Почта
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT', 587)  # 587 - значение по умолчанию
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'  # Преобразуем строку в bool
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')

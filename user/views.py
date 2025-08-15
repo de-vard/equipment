@@ -8,7 +8,7 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    ViewSet для просмотра пользователей (только чтение).
+        ViewSet для просмотра всех пользователей (только чтение).
     """
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -16,7 +16,8 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class UserOrganizationViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    ViewSet для просмотра пользователей которые находятся в тойже организации, что и сам пользователь(только чтение).
+        ViewSet для получения пользователей которые находятся
+        в той же организации, что и сам пользователь(только чтение).
     """
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
